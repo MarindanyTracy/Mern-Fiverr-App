@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 // import Link from 'react-router-dom';
-import './Navbar.scss'
+import "./Navbar.scss";
 
 const Navbar = () => {
+  const [active, setActive] = useState(false);
+
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false)
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", isActive);
+
+    return () => {
+      window.removeEventListener("scroll", isActive);
+    }
+  },[])
+
   return (
-    <div className='navbar'>
+    <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
           {/* <Link to="/"> */}
-          <span className='text'>fiverr</span>
-          <span className='dot'>.</span>
+          <span className="text">fiverr</span>
+          <span className="dot">.</span>
           {/* </Link> */}
         </div>
         <div className="links">
@@ -18,18 +31,21 @@ const Navbar = () => {
           <span>English</span>
           <span>Sign In</span>
           <span>Become a Seller</span>
-          <button className='button'>Join</button>
+          <button className="button">Join</button>
         </div>
-      
       </div>
 
-      <hr />
-      <div className="menu">
-        <span>Test</span>
-        <span>Test</span>
-      </div>
+      {active &&
+        <>
+          <hr />
+          <div className="menu">
+            <span>Test</span>
+            <span>Test</span>
+          </div>
+        </>
+      }
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
