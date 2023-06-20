@@ -1,13 +1,80 @@
-import Navbar from "./components/Navbar/Navbar"
+import React from "react"
+import Navbar from "./components/Navbar/Navbar";
+import Footer from './components/Footer/Footer';
+import Home from './pages/home/Home';
+import Gigs from './pages/gigs/gigs';
+import Gig from './pages/gig/Gig';
+import Add from './pages/add/Add';
+import Orders from './pages/orders/Orders';
+import Messages from './pages/messages/Messages';
+import Message from './pages/message/Message';
+import myGigs from './pages/myGigs/myGigs';
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet
+} from "react-router-dom";
+import './app.scss';
 
 function App() {
 
+  const Layout = () => {
+    return (
+      <div className="app">
+      <Navbar />
+      <Outlet />
+      <Footer />
+      </div>
+    )
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />
+        },
+        {
+          path: '/gigs',
+          element: <Gigs />
+        },
+        {
+          path: '/gig/:id',
+          element: <Gig />
+        },
+        {
+          path: '/orders',
+          element: <Orders />
+        },
+        {
+          path: '/mygigs',
+          element: <myGigs />
+        },
+        {
+          path: '/add',
+          element: <Add />
+        },
+        {
+          path: '/messages',
+          element: <Messages />
+        },
+        {
+          path: '/message/:id',
+          element: <Message />
+        },
+      ]
+    },
+  ]);
   return (
     <div>
-     <Navbar />
+     <RouterProvider router={router} />
     </div>
   )
 }
 
 export default App
+

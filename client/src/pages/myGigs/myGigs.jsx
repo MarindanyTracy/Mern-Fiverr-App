@@ -4,7 +4,7 @@ import './myGigs.scss';
 const myGigs = () => {
   return (
     <div>
-      
+      myGigs
     </div>
   )
 }

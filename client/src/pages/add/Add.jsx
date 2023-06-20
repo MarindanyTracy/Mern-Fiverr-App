@@ -4,7 +4,7 @@ import './Add.scss';
 const Add = () => {
   return (
     <div>
-      
+      Add
     </div>
   )
 }
