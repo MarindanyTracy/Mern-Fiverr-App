@@ -6,6 +6,7 @@ import Slide from '../../components/Slide/Slide';
 import { cards, projects } from "../../data";
 import CatCard from '../../components/catCard/CatCard';
 import ProjectCard from '../../components/projectCard/ProjectCard';
+import Gigs from '../gigs/gigs';
 
 const Home = () => {
   return (
@@ -90,6 +91,8 @@ const Home = () => {
           <ProjectCard key={card.id} item={card} />
         ))}
       </Slide>
+
+      <Gigs />
     </div>
   )
 }
