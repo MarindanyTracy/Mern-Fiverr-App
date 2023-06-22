@@ -8,7 +8,7 @@ import CatCard from '../../components/catCard/CatCard';
 
 const Home = () => {
   return (
-    <div>
+    <div className='home'>
       <Featured />
       <TrustedBy />
       <Slide slidesToShow={5} arrowsScroll={5}>
@@ -16,6 +16,42 @@ const Home = () => {
           <CatCard key={card.id} item={card} />
         ))}
       </Slide>
+
+      <div className="features">
+        <div className="container">
+          <div className="item">
+            <h1>A whole world of freelance talent at your fingertips</h1>
+            <div className="title">
+              <img src="./images/check.png" alt="check" />
+              The best for every budget
+            </div>
+            <p>Find high quality services at every price point. No hourly rates, just project-based pricing.</p>
+          
+
+          <div className="title">
+              <img src="./images/check.png" alt="check" />
+              Quality work done quickly
+            </div>
+            <p>Find the best freelancer to begin working on your project within minutes.</p>
+          
+            <div className="title">
+              <img src="./images/check.png" alt="check" />
+              Protected payments, every time
+            </div>
+            <p>Always know what you'll pay upfront. Your payment isn't released until you approve the work.</p>
+
+            <div className="title">
+              <img src="./images/check.png" alt="check" />
+              24/7 support
+            </div>
+            <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+            </div>
+
+          <div className="item">
+            <video src="./images/video.mp4" controls></video>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
