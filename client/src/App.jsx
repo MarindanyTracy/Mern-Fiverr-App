@@ -8,7 +8,7 @@ import Add from './pages/add/Add';
 import Orders from './pages/orders/Orders';
 import Messages from './pages/messages/Messages';
 import Message from './pages/message/Message';
-import myGigs from './pages/myGigs/myGigs';
+import MyGigs from "./pages/myGigs/myGigs.jsx";
 
 import {
   createBrowserRouter,
@@ -52,7 +52,7 @@ function App() {
         },
         {
           path: '/mygigs',
-          element: <myGigs />
+          element: <MyGigs />
         },
         {
           path: '/add',
