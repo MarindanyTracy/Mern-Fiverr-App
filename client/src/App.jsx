@@ -16,6 +16,7 @@ import {
   Outlet
 } from "react-router-dom";
 import './app.scss';
+import Login from "./pages/login/Login";
 
 function App() {
 
@@ -66,6 +67,10 @@ function App() {
           path: '/message/:id',
           element: <Message />
         },
+        {
+          path: '/login',
+          element: <Login />
+        }
       ]
     },
   ]);

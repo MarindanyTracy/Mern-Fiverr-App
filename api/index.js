@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose, { mongo } from "mongoose";
 import dotenv from "dotenv";
+import cors from 'cors';
 import cookieParser from "cookie-parser";
 import userRoute from './routes/user.route.js';
 import reviewRoute from './routes/review.route.js';
@@ -23,6 +24,7 @@ const connect = async () => {
   }
 };
 
+app.use(cors({ origin: "http://localhost:3000", credentials: true}))
 app.use(express.json());
 app.use(cookieParser());
 
