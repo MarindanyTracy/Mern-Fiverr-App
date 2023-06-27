@@ -10,15 +10,15 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       await newRequest.post("/auth/logout");
       localStorage.setItem("currentUser", null);
-      navigate("/")
-    }catch(err) {
+      navigate("/");
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -51,10 +51,7 @@ const Navbar = () => {
           {!currentUser && <button className="button">Join</button>}
           {currentUser && (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img
-                src={currentUser.img || '/images/noavatar.jpg'}
-                alt=""
-              />
+              <img src={currentUser.img || "/images/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
@@ -74,7 +71,9 @@ const Navbar = () => {
                   <Link className="link" to="/messages">
                     Messages
                   </Link>
-                  <Link className="link"onClick={handleLogout}>Logout</Link>
+                  <Link className="link" onClick={handleLogout}>
+                    Logout
+                  </Link>
                 </div>
               )}
             </div>
@@ -122,3 +121,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
