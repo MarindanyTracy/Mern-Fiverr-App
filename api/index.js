@@ -28,6 +28,10 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true}))
 app.use(express.json());
 app.use(cookieParser());
 
+// app.get("s3Url", (req,res) => {
+
+// })
+
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use('/api/gigs', gigRoute);
