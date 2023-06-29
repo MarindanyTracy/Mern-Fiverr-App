@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import newRequest from "../../utils/newRequest.js";
+import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -12,8 +12,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await newRequest.post("/auth/login", { username, password });
+      const res = await newRequest.post("auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
+     
       navigate("/");
     } catch (err) {
       setError(err.response.data);
@@ -38,7 +39,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
-        {error & error}
+      {error & error}
       </form>
     </div>
   );
