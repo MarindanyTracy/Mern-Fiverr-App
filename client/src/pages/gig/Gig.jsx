@@ -1,12 +1,12 @@
 import React from "react";
 import "./Gig.scss";
-import { Slider } from "infinite-react-carousel";
+import { Slider } from "infinite-react-carousel/lib";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 
-const Gig = () => {
+function Gig() {
   const { id } = useParams();
 
   const { isLoading, error, data } = useQuery({
@@ -16,22 +16,26 @@ const Gig = () => {
         return res.data;
       }),
   });
+
+  const userId = data?.userId;
+
   const {
     isLoading: isLoadingUser,
     error: errorUser,
     data: dataUser,
   } = useQuery({
-    queryKey: ["gig"],
+    queryKey: ["user"],
     queryFn: () =>
-      newRequest.get(`/users/${data.userId}`).then((res) => {
+      newRequest.get(`/users/${userId}`).then((res) => {
         return res.data;
       }),
+    enabled: !!userId,
   });
 
   return (
     <div className="gig">
       {isLoading ? (
-        "Loading"
+        "loading"
       ) : error ? (
         "Something went wrong!"
       ) : (
@@ -44,7 +48,7 @@ const Gig = () => {
             {isLoadingUser ? (
               "loading"
             ) : errorUser ? (
-              "Something went wrong"
+              "Something went wrong!"
             ) : (
               <div className="user">
                 <img
@@ -60,10 +64,7 @@ const Gig = () => {
                       .map((item, i) => (
                         <img src="/images/star.png" alt="" key={i} />
                       ))}
-                    <span>
-                      {" "}
-                      {Math.round(data.totalStars / data.starNumber)}
-                    </span>
+                    <span>{Math.round(data.totalStars / data.starNumber)}</span>
                   </div>
                 )}
               </div>
@@ -78,15 +79,12 @@ const Gig = () => {
             {isLoadingUser ? (
               "loading"
             ) : errorUser ? (
-              "Something went wrong"
+              "Something went wrong!"
             ) : (
               <div className="seller">
                 <h2>About The Seller</h2>
                 <div className="user">
-                  <img
-                    src={dataUser.img || "/images/noavatar.jpg"}
-                    alt=""
-                  />
+                  <img src={dataUser.img || "/images/noavatar.jpg"} alt="" />
                   <div className="info">
                     <span>{dataUser.username}</span>
                     {!isNaN(data.totalStars / data.starNumber) && (
@@ -97,7 +95,6 @@ const Gig = () => {
                             <img src="/images/star.png" alt="" key={i} />
                           ))}
                         <span>
-                          {" "}
                           {Math.round(data.totalStars / data.starNumber)}
                         </span>
                       </div>
@@ -129,9 +126,7 @@ const Gig = () => {
                     </div>
                   </div>
                   <hr />
-                  <p>
-                    {dataUser.desc}
-                  </p>
+                  <p>{dataUser.desc}</p>
                 </div>
               </div>
             )}
@@ -146,7 +141,7 @@ const Gig = () => {
             <div className="details">
               <div className="item">
                 <img src="/images/clock.png" alt="" />
-                <span>{data.deliveryTime} Days Delivery</span>
+                <span>{data.deliveryDate} Days Delivery</span>
               </div>
               <div className="item">
                 <img src="/images/recycle.png" alt="" />
@@ -162,11 +157,12 @@ const Gig = () => {
               ))}
             </div>
             <button>Continue</button>
+          
           </div>
         </div>
       )}
     </div>
   );
-};
+}
 
 export default Gig;
